@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Panel</title>
+</head>
+
+<body>
+
+<h1>Tech Manthan Registrations</h1>
+
+<h2>Total Participants: {{total}}</h2>
+
+<a href="/export">Download Excel</a>
+
+<table border="1" cellpadding="10">
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Phone</th>
+<th>College</th>
+<th>Events</th>
+<th>Games</th>
+</tr>
+
+{% for row in data %}
+
+<tr>
+<td>{{row[0]}}</td>
+<td>{{row[1]}}</td>
+<td>{{row[2]}}</td>
+<td>{{row[3]}}</td>
+<td>{{row[4]}}</td>
+<td>{{row[5]}}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>

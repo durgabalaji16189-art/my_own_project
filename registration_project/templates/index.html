@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech Manthan Registration</title>
+
+<style>
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: gold;
+    overflow-x: hidden;
+
+    background: linear-gradient(270deg,
+        #001f4d,
+        #003366,
+        #004080,
+        #001f4d,
+        #00264d
+    );
+
+    background-size: 400% 400%;
+    animation: gradientMove 12s ease infinite;
+}
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* 🏆 Title Upgrade */
+.main-title {
+    font-size: 48px;
+    text-align: center;
+    margin: 25px 0;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px gold, 0 0 40px rgba(255,215,0,0.4);
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px gold; }
+    to { text-shadow: 0 0 30px gold, 0 0 60px rgba(255,215,0,0.6); }
+}
+
+/* 💎 FORM ENHANCED */
+.form-container {
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(15px);
+    padding: 35px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    box-shadow: 0 0 40px rgba(0,0,0,0.8);
+    width: 90%;
+    max-width: 650px;
+    margin: auto;
+    animation: fadeIn 1s ease;
+}
+
+/* 🧾 Inputs */
+input[type="text"],
+input[type="tel"] {
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0 18px 0;
+    border: 1px solid gold;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.95);
+    transition: 0.3s;
+}
+
+input:focus {
+    box-shadow: 0 0 15px gold;
+    transform: scale(1.02);
+}
+
+/* 📂 Section Headings */
+h3 {
+    margin-top: 30px;
+    border-left: 4px solid gold;
+    padding-left: 10px;
+    font-size: 20px;
+}
+
+/* 🎯 EVENT CARD STYLE */
+.event-option {
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.event-option:hover {
+    background: rgba(0, 204, 255, 0.15);
+    transform: translateX(8px) scale(1.02);
+    box-shadow: 0 0 15px rgba(0,204,255,0.4);
+}
+
+/* icons */
+.event-option img {
+    width: 30px;
+    margin-right: 10px;
+    transition: 0.3s;
+}
+
+.event-option:hover img {
+    transform: scale(1.2) rotate(5deg);
+    filter: drop-shadow(0 0 8px #00ccff);
+}
+
+/* checkbox glow */
+.event-option input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-right: 10px;
+    accent-color: #00ccff;
+    cursor: pointer;
+}
+
+/* 🎮 sub events smooth */
+.sub-events {
+    margin-left: 25px;
+    display: none;
+    animation: slideDown 0.4s ease;
+}
+
+@keyframes slideDown {
+    from {opacity: 0; transform: translateY(-10px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* 🚀 BUTTON UPGRADE */
+button {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(45deg, #00ccff, #00ffff);
+    color: black;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #00ccff, 0 0 50px rgba(0,255,255,0.4);
+}
+
+/* 📱 Mobile */
+@media (max-width: 600px) {
+    .main-title {
+        font-size: 32px;
+    }
+}
+/* 🌈 GRADIENT NEON CHECKBOX */
+.event-option input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    position: relative;
+    cursor: pointer;
+    margin-right: 10px;
+    border: 2px solid transparent;
+    
+    background:
+        linear-gradient(#001f4d, #001f4d) padding-box,
+        linear-gradient(45deg, #00ccff, #0066ff, #cc00ff) border-box;
+
+    transition: 0.3s;
+    overflow: hidden;
+}
+
+/* 🌟 HOVER GLOW */
+.event-option input[type="checkbox"]:hover {
+    box-shadow: 0 0 10px #00ccff, 0 0 25px #0066ff;
+}
+
+/* ✅ CHECKED STATE */
+.event-option input[type="checkbox"]:checked {
+    background:
+        linear-gradient(135deg, rgba(0,255,255,0.2), rgba(204,0,255,0.2)),
+        linear-gradient(45deg, #00ccff, #0066ff, #cc00ff);
+    animation: gradientShift 2s linear infinite;
+    box-shadow: 0 0 15px #00ccff, 0 0 35px #cc00ff;
+}
+
+/* ✔ TICK */
+.event-option input[type="checkbox"]::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg) scale(0);
+    transition: 0.25s ease;
+}
+
+.event-option input[type="checkbox"]:checked::after {
+    transform: rotate(45deg) scale(1);
+}
+
+/* 💥 GRADIENT RIPPLE */
+.event-option input[type="checkbox"]::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+  top: var(--mouse-y);
+left: var(--mouse-x);
+transform: translate(-50%, -50%);
+    opacity: 0;
+
+    background: radial-gradient(circle,
+        rgba(0,255,255,0.6),
+        rgba(102,0,255,0.4),
+        transparent 70%);
+}
+
+/* trigger ripple */
+.event-option input[type="checkbox"]:active::before {
+    animation: gradientRipple 0.7s ease-out;
+}
+
+/* 🌈 BORDER + BG SHIFT */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+        box-shadow: 0 0 10px #00ccff, 0 0 25px #0066ff;
+    }
+    50% {
+        box-shadow: 0 0 20px #0066ff, 0 0 40px #cc00ff;
+    }
+    100% {
+        background-position: 100% 50%;
+        box-shadow: 0 0 10px #00ccff, 0 0 25px #0066ff;
+    }
+}
+
+/* 💥 RIPPLE ANIMATION */
+@keyframes gradientRipple {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.8;
+    }
+    100% {
+        width: 140px;
+        height: 140px;
+        opacity: 0;
+    }
+}
+/* 🧲 magnetic base */
+.event-option {
+    transition: transform 0.2s ease;
+    will-change: transform;
+}
+
+/* subtle depth glow */
+.form-container.tilt-active {
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8),
+                0 0 30px rgba(0,204,255,0.3);
+}
+/* 💡 glow container */
+.event-option {
+    position: relative;
+    overflow: hidden;
+}
+
+/* 🌟 moving glow */
+.event-option::before {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle,
+        rgba(0,255,255,0.35),
+        rgba(0,102,255,0.25),
+        transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* show glow */
+.event-option:hover::before {
+    opacity: 1;
+}
+/* 🌊 ripple container */
+.event-option {
+    position: relative;
+    overflow: hidden;
+}
+
+/* 💧 ripple element */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+
+    background: radial-gradient(circle,
+        rgba(0,255,255,0.5) 0%,
+        rgba(0,102,255,0.3) 40%,
+        rgba(0,0,0,0) 70%);
+
+    transform: scale(0);
+    animation: waterRipple 0.7s ease-out;
+}
+
+/* 🌊 animation */
+@keyframes waterRipple {
+    to {
+        transform: scale(6);
+        opacity: 0;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- 💻 Floating Icons -->
+
+<div class="tech-bg">
+    <img src="https://img.icons8.com/ios-filled/100/ffffff/laptop.png">
+    <img src="https://img.icons8.com/ios-filled/100/ffffff/smartphone.png">
+    <img src="https://img.icons8.com/ios-filled/100/ffffff/monitor.png">
+    <img src="https://img.icons8.com/ios-filled/100/ffffff/code.png">
+</div>
+
+<div class="main-title">TECH MANTHAN</div>
+
+<div class="form-container">
+<h2>Registration Form</h2>
+
+<form action="/register" method="POST">
+
+<input type="text" name="participant_name" placeholder="Participant Name" required>
+<input type="tel" name="phone_number" pattern="[0-9]{10}" maxlength="10" placeholder="Phone Number" required>
+<input type="text" name="college" placeholder="College Name" required>
+
+<h3>Formal Events:</h3>
+<label class="event-option"><input type="checkbox" name="events[]" value="Tech Quiz"><img src="https://img.icons8.com/fluency/48/test.png">Tech Quiz</label>
+<label class="event-option"><input type="checkbox" name="events[]" value="Blind Coding"><img src="https://img.icons8.com/fluency/48/source-code.png">Blind Coding</label>
+<label class="event-option"><input type="checkbox" name="events[]" value="Logo Making"><img src="https://img.icons8.com/fluency/48/design.png">Logo Making</label>
+<label class="event-option"><input type="checkbox" name="events[]" value="App Building"><img src="https://img.icons8.com/fluency/48/android-os.png">App Building</label>
+<label class="event-option"><input type="checkbox" name="events[]" value="Model Presentation"><img src="https://img.icons8.com/fluency/48/presentation.png">Model Presentation</label>
+<label class="event-option"><input type="checkbox" name="events[]" value="PPT Presentation"><img src="https://img.icons8.com/fluency/48/presentation.png">PPT Presentation</label>
+<label class="event-option"><input type="checkbox" name="events[]" value="Debugging"><img src="https://img.icons8.com/fluency/48/bug.png">Debugging</label>
+
+<h3>Informal Events:</h3>
+<label class="event-option"><input type="checkbox" name="events[]" value="Tech Hunt"><img src="https://img.icons8.com/fluency/48/treasure-map.png">Tech Hunt</label>
+<label class="event-option"><input type="checkbox" name="events[]" value="Spot Photography"><img src="https://img.icons8.com/fluency/48/camera.png">Spot Photography</label>
+<label class="event-option"><input type="checkbox" name="events[]" value="Dance"><img src="https://img.icons8.com/fluency/48/dancing.png">Dance</label>
+<label class="event-option"><input type="checkbox" name="events[]" value="Singing"><img src="https://img.icons8.com/fluency/48/microphone.png">Singing</label>
+
+<label class="event-option"><input type="checkbox" id="gamesCheck" name="events[]" value="Games"><img src="https://img.icons8.com/fluency/48/video-game-controller.png">Games</label>
+
+<div class="sub-events" id="gamesOptions">
+<label class="event-option"><input type="checkbox" name="games[]" value="LUDO"><img src="https://img.icons8.com/fluency/48/board-game.png">LUDO</label>
+<label class="event-option"><input type="checkbox" name="games[]" value="FREE FIRE"><img src="https://img.icons8.com/fluency/48/aim.png">FREE FIRE</label>
+<label class="event-option"><input type="checkbox" name="games[]" value="BGMI"><img src="https://img.icons8.com/fluency/48/helmet.png">BGMI</label>
+</div>
+
+<label class="event-option"><input type="checkbox" name="events[]" value="Reel Making"><img src="https://img.icons8.com/fluency/48/video.png">Reel Making</label> <label class="event-option"><input type="checkbox" name="events[]" value="Mr and Miss"><img src="https://img.icons8.com/fluency/48/crown.png">Mr & Miss</label> <label class="event-option"><input type="checkbox" name="events[]" value="Dumb Act"><img src="https://img.icons8.com/fluency/48/comedy.png">Dumb Act</label>
+
+<button type="submit">Register Now 🚀</button>
+
+</form>
+</div>
+
+<!-- 🌌 Three.js -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+camera.position.z = 5;
+
+const renderer = new THREE.WebGLRenderer({ alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.domElement.style.position = "fixed";
+renderer.domElement.style.top = 0;
+renderer.domElement.style.left = 0;
+renderer.domElement.style.zIndex = "-1";
+document.body.appendChild(renderer.domElement);
+
+// Particles
+const geometry = new THREE.BufferGeometry();
+const count = 1000;
+const positions = new Float32Array(count * 3);
+
+for(let i = 0; i < count * 3; i++) {
+    positions[i] = (Math.random() - 0.5) * 10;
+}
+
+geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+const material = new THREE.PointsMaterial({
+    size: 0.04,
+    color: 0xffffff,
+    transparent: true,
+    opacity: 0.8
+});
+
+const particles = new THREE.Points(geometry, material);
+scene.add(particles);
+
+// 🖱️ Mouse Interaction
+let mouseX = 0;
+let mouseY = 0;
+
+document.addEventListener("mousemove", (event) => {
+    mouseX = (event.clientX / window.innerWidth - 0.5) * 2;
+    mouseY = (event.clientY / window.innerHeight - 0.5) * 2;
+});
+
+// Animation
+function animate() {
+    requestAnimationFrame(animate);
+
+    particles.rotation.y += 0.001;
+    particles.rotation.x += 0.0005;
+
+    // Interactive movement
+    particles.rotation.y += mouseX * 0.002;
+    particles.rotation.x += mouseY * 0.002;
+
+    renderer.render(scene, camera);
+}
+
+animate();
+
+// Responsive
+window.addEventListener("resize", () => {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+});
+
+// 🎮 Toggle Games
+const gamesCheck = document.getElementById("gamesCheck");
+const gamesOptions = document.getElementById("gamesOptions");
+
+gamesCheck.addEventListener("change", function() {
+    gamesOptions.style.display = this.checked ? "block" : "none";
+});
+const options = document.querySelectorAll(".event-option");
+
+options.forEach(option => {
+
+    option.addEventListener("mousemove", (e) => {
+        const rect = option.getBoundingClientRect();
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const moveX = (x - centerX) / 8;
+        const moveY = (y - centerY) / 8;
+
+        option.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    });
+
+    option.addEventListener("mouseleave", () => {
+        option.style.transform = `translate(0, 0)`;
+    });
+
+});
+const glowItems = document.querySelectorAll(".event-option");
+
+glowItems.forEach(item => {
+    item.addEventListener("mousemove", (e) => {
+        const rect = item.getBoundingClientRect();
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        item.style.setProperty("--x", x + "px");
+        item.style.setProperty("--y", y + "px");
+
+        item.style.setProperty("--glowX", x + "px");
+        item.style.setProperty("--glowY", y + "px");
+
+        item.style.setProperty("--mouse-x", x + "px");
+        item.style.setProperty("--mouse-y", y + "px");
+
+        item.style.setProperty("--posX", x + "px");
+        item.style.setProperty("--posY", y + "px");
+
+        item.querySelector("::before");
+    });
+
+    item.addEventListener("mouseleave", () => {
+        item.style.setProperty("--x", "0px");
+        item.style.setProperty("--y", "0px");
+    });
+});
+const rippleItems = document.querySelectorAll(".event-option");
+
+rippleItems.forEach(item => {
+
+    item.addEventListener("click", (e) => {
+        const rect = item.getBoundingClientRect();
+
+        const ripple = document.createElement("span");
+        ripple.classList.add("ripple");
+
+        const size = Math.max(rect.width, rect.height);
+
+        ripple.style.width = ripple.style.height = size + "px";
+
+        ripple.style.left = (e.clientX - rect.left - size / 2) + "px";
+        ripple.style.top = (e.clientY - rect.top - size / 2) + "px";
+
+        item.appendChild(ripple);
+
+        /* remove after animation */
+        setTimeout(() => {
+            ripple.remove();
+        }, 700);
+    });
+
+});
+</script>
+
+</body>
+</html>
