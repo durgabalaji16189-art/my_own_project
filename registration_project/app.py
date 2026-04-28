@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import mysql.connector
 import pandas as pd
 
-app = Flask(__name__)
+application= Flask(__name__)
 
 # MySQL Connection
 db = mysql.connector.connect(
