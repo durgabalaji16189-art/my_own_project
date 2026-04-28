@@ -1,40 +1,101 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Admin Panel</title>
+    <title>Admin Panel</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h2 {
+            color: #555;
+        }
+
+        a {
+            display: inline-block;
+            margin: 15px;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        a:hover {
+            background: #0056b3;
+        }
+
+        table {
+            margin: auto;
+            border-collapse: collapse;
+            width: 90%;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: #007bff;
+            color: white;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        tr:hover {
+            background: #e6f2ff;
+        }
+    </style>
+
 </head>
 
 <body>
 
 <h1>Tech Manthan Registrations</h1>
 
-<h2>Total Participants: {{total}}</h2>
+<h2>Total Participants: {{ total }}</h2>
 
-<a href="/export">Download Excel</a>
+<a href="/export">⬇ Download Excel</a>
 
-<table border="1" cellpadding="10">
-
-<tr>
-<th>ID</th>
-<th>Name</th>
-<th>Phone</th>
-<th>College</th>
-<th>Events</th>
-<th>Games</th>
-</tr>
-
-{% for row in data %}
+<table>
 
 <tr>
-<td>{{row[0]}}</td>
-<td>{{row[1]}}</td>
-<td>{{row[2]}}</td>
-<td>{{row[3]}}</td>
-<td>{{row[4]}}</td>
-<td>{{row[5]}}</td>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Phone</th>
+    <th>College</th>
+    <th>Events</th>
+    <th>Games</th>
 </tr>
 
-{% endfor %}
+{% if data %}
+    {% for row in data %}
+    <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+        <td>{{ row[3] }}</td>
+        <td>{{ row[4] }}</td>
+        <td>{{ row[5] }}</td>
+    </tr>
+    {% endfor %}
+{% else %}
+    <tr>
+        <td colspan="6">No data available</td>
+    </tr>
+{% endif %}
 
 </table>
 
