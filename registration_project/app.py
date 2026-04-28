@@ -1,25 +1,41 @@
-from flask import Flask, render_template, request
-import mysql.connector
+from flask import Flask, render_template, request, send_file
+import sqlite3
 import pandas as pd
+import os
 
-application= Flask(__name__)
+app = Flask(__name__)
 
-# MySQL Connection
-db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="durgabalaji8121@#",
-    database="techmanthan"
-)
+# Create DB if not exists
+def init_db():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS registrations (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT,
+            phone TEXT UNIQUE,
+            college TEXT,
+            events TEXT,
+            games TEXT
+        )
+    ''')
+
+    conn.commit()
+    conn.close()
+
+init_db()
+
 
 # Home page
 @app.route('/')
 def home():
     return render_template('index.html')
 
+
+# Submit form
 @app.route('/submit', methods=['POST'])
 def submit():
-
     name = request.form['participant_name']
     phone = request.form['phone_number']
     college = request.form['college']
@@ -30,30 +46,33 @@ def submit():
     events_str = ", ".join(events)
     games_str = ", ".join(games)
 
-    cursor = db.cursor()
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
 
-    # Prevent duplicate phone numbers
-    cursor.execute("SELECT * FROM registrations WHERE phone=%s", (phone,))
+    # Check duplicate
+    cursor.execute("SELECT * FROM registrations WHERE phone=?", (phone,))
     existing = cursor.fetchone()
 
     if existing:
+        conn.close()
         return "This phone number already registered!"
 
     cursor.execute(
-        "INSERT INTO registrations (name,phone,college,events,games) VALUES (%s,%s,%s,%s,%s)",
+        "INSERT INTO registrations (name,phone,college,events,games) VALUES (?,?,?,?,?)",
         (name, phone, college, events_str, games_str)
     )
 
-    db.commit()
+    conn.commit()
+    conn.close()
 
     return render_template("success.html")
 
 
-# Admin page
+# Admin page (VIEW DATA 🔥)
 @app.route('/admin')
 def admin():
-
-    cursor = db.cursor()
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM registrations")
     data = cursor.fetchall()
@@ -61,17 +80,21 @@ def admin():
     cursor.execute("SELECT COUNT(*) FROM registrations")
     total = cursor.fetchone()[0]
 
+    conn.close()
+
     return render_template("admin.html", data=data, total=total)
 
 
 # Export to Excel
 @app.route('/export')
 def export():
-
-    cursor = db.cursor()
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
 
     cursor.execute("SELECT name,phone,college,events,games FROM registrations")
     data = cursor.fetchall()
+
+    conn.close()
 
     df = pd.DataFrame(data, columns=["Name","Phone","College","Events","Games"])
 
@@ -81,5 +104,6 @@ def export():
     return send_file(file, as_attachment=True)
 
 
+# Run app (IMPORTANT FOR REPLIT)
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=81)
